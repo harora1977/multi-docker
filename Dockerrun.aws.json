@@ -1,0 +1,38 @@
+{
+	"AWSEBDockerrunVersion" : 2,
+	"containerDefinitions" : [
+		{
+			"name":"client",
+			"image":"harora2002/multi-client",
+			"host":"client",
+			"essential":"false"
+		},
+		{
+			"name":"server",
+			"image":"harora2002/multi-server",
+			"host":"api",
+			"essential":"false"
+		},
+		{
+			"name":"worker",
+			"image":"harora2002/multi-worker",
+			"host":"worker",
+			"essential":"false"
+		},
+		{
+			"name":"nginx",
+			"image":"harora2002/multi-nginx",
+			"host":"nginx",
+			"essential":"true",
+			"portMappings":[
+				{
+					"hostPort": 80,
+					"containerPort": 80			
+				}
+			],
+			"links": ["server","client"]
+		}
+		
+	]
+
+}
